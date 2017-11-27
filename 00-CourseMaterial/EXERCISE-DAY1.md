@@ -68,7 +68,7 @@ In the project directory from exercise 1:
 
 ## Exercise 3: Komponenten-Structure
 
-Change the example `02-Components/06-Event`, so so that each `Clock` component has it's own *Refresh*-Button.
+Change the example `02-Components/07-Event`, so so that each `Clock` component has it's own *Refresh*-Button.
 
 
 
@@ -94,7 +94,7 @@ Start with the prepared project `10-ToDOApp/00-todo-skeleton`:
 	npm install
 	npm start
 	
-Implement the functionality of the ToDo App:
+Implement the functionality of the app in the single App component:
 
 - Adding ToDos
 - Removing ToDos	
