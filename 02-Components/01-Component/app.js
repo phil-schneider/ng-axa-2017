@@ -1,8 +1,12 @@
 class GreeterComponent extends React.Component {
 
     render() {
+
+        let concated= this.props.title + ' ' + this.props.message
+
         return (
             <div>
+                <h1>{concated}</h1>
                 <h1>{this.props.title}</h1>
                 <p>{this.props.message}</p>
                 <p>The current time is:</p>

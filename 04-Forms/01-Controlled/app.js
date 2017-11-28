@@ -53,6 +53,8 @@ class AppComponent extends React.Component {
         console.log(this.state);
         this.setState({isGoing: true, numberOfGuests: 2})
     };
+
+
 }
 
 

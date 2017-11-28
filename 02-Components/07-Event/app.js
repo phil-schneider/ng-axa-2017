@@ -1,12 +1,41 @@
 const Title = (props) => <h1>{props.title}</h1>;
 
+/**
 const Clock = (props) => {
     const displayTime = moment(props.time).add(props.hourOffset, 'h').toString();
     return (
-        <h3>
-            {displayTime}
-        </h3>
+
     );
+};
+ **/
+
+class Clock extends React.Component{
+
+    constructor (props){
+        super(props);
+        this.state = {
+            time : props.time,
+            hourOffset: props.hourOffset
+         }
+    }
+
+    render(){
+        const displayTime = moment(this.state.time).add(this.state.hourOffset, 'h').toString();
+
+        return (
+            <div>
+            <h3>
+                {displayTime}
+            </h3>
+                <button onClick={() => this.refreshTime()}>Refresh</button>
+            </div>
+        )
+    }
+
+    refreshTime(){
+        this.setState({time: new Date});
+
+    }
 };
 
 class AppComponent extends React.Component {

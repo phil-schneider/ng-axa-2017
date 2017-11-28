@@ -1,6 +1,21 @@
 import React, {Component} from 'react';
+import NewToDo from './NewToDo';
+import ToDoList from './ToDoList';
 
-class App extends Component {
+export default class App extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: []
+        };
+
+        this.addListItem = this.addListItem.bind(this);
+        this.removeListItem = this.removeListItem.bind(this);
+
+    }
+
     render() {
         return (
             <div className="App">
@@ -11,17 +26,20 @@ class App extends Component {
                 </div>
 
                 <section className="todoapp">
+                    <NewToDo addListItemFunc={this.addListItem}/>
 
-                    <form className="new-todo">
+                    {/*<form className="new-todo" onSubmit={}>
                         <input id="todo-text" type="text" placeholder="What needs to be done?" autoFocus
-                               autoComplete="off"/>
-                        <button id="add-button" className="add-button">+</button>
+                               autoComplete="off" value={this.state.newItem}
+                               name="newItem"
+                               onChange={this.handleInputChange.bind(this)}/>
+                        <button id="add-button" className="add-button" type="submit">+</button>
                     </form>
+                    */}
 
                     <div className="main">
-                        <ul id="todo-list" className="todo-list">
-                        </ul>
-                    </div>
+                        <ToDoList items={this.state.items} removeListItemFunc={this.removeListItem} />
+                  </div>
                 </section>
                 <footer className="info">
                     <p>JavaScript Example / Initial template from <a
@@ -31,6 +49,24 @@ class App extends Component {
             </div>
         );
     }
+
+    removeListItem(index) {
+        this.setState({
+            items: this.state.items.filter((_, i) => i !== index)
+        })
+    }
+
+
+    addListItem(value) {
+        console.log('value: ' + value);
+
+        if (!value.trim()) {
+            return
+        }
+        let values = [...this.state.items, value];
+        this.setState({items: values,});
+    }
+
+
 }
 
-export default App;
