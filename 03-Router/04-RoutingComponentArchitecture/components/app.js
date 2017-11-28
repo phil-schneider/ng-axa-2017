@@ -20,20 +20,21 @@ class App extends React.Component {
 
                     <hr/>
 
-<Route exact path="/" render={(props) => (
-    <Child1
-        message={this.state.message1}
-        notify={this.alert}
-        {...props}
-/>
-)}/>
+                    <Route exact path="/" render={(props) => (
+                        <Child1
+                            message={this.state.message1}
+                            notify={this.alert}
+                            {...props}
+                        />
+                    )}/>
 
-<Route path="/child2" render={(props) => (
-    <Child2
-        message={this.state.message2}
-        notify={this.alert}
-        {...props}/>
-)}/>
+                    <Route path="/child2/:id?" render={(props) => (
+                        <Child2
+                            message={this.state.message2}
+                            notify={this.alert}
+                            {...props}
+                        />
+                    )}/>
                 </div>
             </Router>
         );
