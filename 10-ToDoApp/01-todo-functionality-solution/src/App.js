@@ -10,6 +10,11 @@ class App extends Component {
     };
 
     render() {
+        let submitButton = null;
+        if (this.state.toDoTitle.length > 3){
+            submitButton = <button id="add-button" className="add-button">+</button>;
+        }
+
         return (
             <div className="App">
 
@@ -27,7 +32,7 @@ class App extends Component {
                                value={this.state.toDoTitle}
                                onChange={this.formChange}
                         />
-                        <button id="add-button" className="add-button">+</button>
+                        {submitButton}
                     </form>
 
                     <div className="main">
