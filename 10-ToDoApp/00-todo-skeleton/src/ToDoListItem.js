@@ -10,9 +10,9 @@ export default class ToDoListItem extends Component {
 
     render(){
         return (
-                <li key={this.props.index}>{this.props.value}
+                <li key={this.props.index}>{this.props.item.wert}
                     <button id="del-button" className="add-button" itemID={this.props.index} type="submit"
-                            onClick={() => this.props.removeListItemFunc(this.props.index)}>X</button>
+                            onClick={() => this.props.removeListItemFunc(this.props.item.id)}>X</button>
                 </li>
 
         );

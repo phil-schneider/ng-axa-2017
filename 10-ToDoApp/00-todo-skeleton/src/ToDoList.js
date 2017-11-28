@@ -5,16 +5,17 @@ import PropTypes from 'prop-types'
 export default class ToDoList extends Component {
 
     static propTypes = {
-        removeListItemFunc: PropTypes.func.isRequired
+        removeListItemFunc: PropTypes.func.isRequired,
+        filterItemFunc: PropTypes.func.isRequired
     };
     
     render() {
         return <div>
             {
-                 this.props.items.map((itemValue, index) =>
+                 this.props.items.filter((item) => this.props.filterItemFunc(item)).map((item, index) =>
                 (
                 <ul key={index} id="todo-list" className="todo-list">
-                    <ToDoListItem index={index} value={itemValue} removeListItemFunc={this.props.removeListItemFunc}/>
+                    <ToDoListItem index={index} item={item} removeListItemFunc={this.props.removeListItemFunc}/>
                 </ul>
                 ))
             }
