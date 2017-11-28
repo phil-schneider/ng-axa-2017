@@ -14,7 +14,7 @@ export default class PendingList extends Component {
                 <div className="main">
                     <ToDoList items={this.props.items}
                               removeListItemFunc={this.props.removeListItemFunc}
-                              filterItemFunc={(i) => (i.done === true)}
+                              filterItemFunc={(i) => (i.completed === true)}
                     />
 
                 </div>

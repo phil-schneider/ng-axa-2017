@@ -10,7 +10,7 @@ export default class ToDoListItem extends Component {
 
     render(){
         return (
-                <li key={this.props.index}>{this.props.item.wert}
+                <li key={this.props.index}>{this.props.item.title}
                     <button id="del-button" className="add-button" itemID={this.props.index} type="submit"
                             onClick={() => this.props.removeListItemFunc(this.props.item.id)}>X</button>
                 </li>

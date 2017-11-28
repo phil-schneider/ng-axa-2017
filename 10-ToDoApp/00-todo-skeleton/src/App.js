@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DoneList from './DoneList';
 import PendingList from './PendingList';
+import axios from 'axios'
 
 import {
     HashRouter as Router,
@@ -8,7 +9,10 @@ import {
 } from 'react-router-dom';
 
 
+const API_URL = 'http://localhost:3456/todos';
+
 export default class App extends Component {
+
 
 
     constructor(props) {
@@ -20,7 +24,15 @@ export default class App extends Component {
         this.addListItem = this.addListItem.bind(this);
         this.removeListItem = this.removeListItem.bind(this);
         this.markDoneListItem = this.markDoneListItem.bind(this);
+    }
 
+    componentDidMount(){
+        axios.get(API_URL)
+            .then((response) => {
+                this.setState({
+                    items: response.data.result
+                })
+            });
     }
 
     render() {
@@ -54,8 +66,6 @@ export default class App extends Component {
                     </div>
                 </Router>
 
-
-
                 <footer className="info">
                     <p>JavaScript Example / Initial template from <a
                         href="https://github.com/tastejs/todomvc-app-template">todomvc-app-template</a>
@@ -66,17 +76,26 @@ export default class App extends Component {
     }
 
     removeListItem(id) {
+        console.log('removeListItem');
+
+
+        axios.delete(API_URL + '/'+id)
+            .then( (response) => {
+                console.log('ID '+ {id} + ' removed ');
         this.setState({
             items: this.state.items.filter((item) => item.id !== id)
         })
-
+            });
     }
 
     markDoneListItem(id) {
+        console.log('markDoneListItem');
         const newItems = [...this.state.items]
         for (let item of newItems) {
             if (item.id === id) {
-                item.done = true;
+                item.completed = true;
+                axios.put(API_URL+ '/' + id, item)
+                    .then((response) =>  {console.log('updated' + item)})
             }
         }
         this.setState({items: newItems});
@@ -87,8 +106,24 @@ export default class App extends Component {
         if (!value.trim()) {
             return
         }
-        let values = [...this.state.items, {wert: value, done: false, id: this.getRandomInt()}];
-        this.setState({items: values});
+
+
+        const singleTodo = {
+            "title": value,
+            "completed": false}
+
+
+        axios.post(API_URL,singleTodo)
+            .then(
+                (response) => {
+                    singleTodo.id = response.data.result;
+
+                let values = [...this.state.items, singleTodo];
+                    this.setState({items: values});
+                console.log(singleTodo);
+                }
+
+    )
     }
 
 
